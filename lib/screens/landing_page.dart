@@ -348,7 +348,7 @@ class _LandingPageState extends State<LandingPage> {
                   // Image de fond
                   Positioned.fill(
                     child: Image.asset(
-                      'assets/images/RST2023_Watineetal_Poster.PNG',
+                      'assets/images/I_CAL_RBG_S1_N_R.jpeg',
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
