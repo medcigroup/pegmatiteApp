@@ -1,0 +1,81 @@
+# .github/workflows/deploy.yml
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]  # Déclenche sur push vers main ou master
+  pull_request:
+    branches: [ main, master ]
+  
+  # Permet de déclencher manuellement
+  workflow_dispatch:
+
+# Permissions nécessaires pour GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ne lance qu'une seule instance à la fois
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. Récupérer le code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
+    # 2. Configurer Flutter
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.0'  # Utilisez votre version Flutter
+        channel: 'stable'
+        cache: true
+    
+    # 3. Vérifier Flutter
+    - name: Flutter doctor
+      run: flutter doctor -v
+    
+    # 4. Récupérer les dépendances
+    - name: Get dependencies
+      run: flutter pub get
+    
+    # 5. Analyser le code (optionnel)
+    - name: Analyze code
+      run: flutter analyze
+    
+    # 6. Tester (optionnel - commentez si pas de tests)
+    # - name: Run tests
+    #   run: flutter test
+    
+    # 7. Build pour le web
+    - name: Build web
+      run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
+    
+    # 8. Configurer GitHub Pages
+    - name: Setup Pages
+      uses: actions/configure-pages@v3
+      
+    # 9. Upload des fichiers
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: './build/web'
+
+  # Job de déploiement
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
