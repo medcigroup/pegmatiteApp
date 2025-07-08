@@ -53,9 +53,7 @@ jobs:
       run: |
         flutter build web \
           --release \
-          --base-href "/${{ github.event.repository.name }}/" \
-          --web-renderer canvaskit \
-          --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/canvaskit/
+          --base-href "/${{ github.event.repository.name }}/"
     
     - name: Add .nojekyll file
       run: touch build/web/.nojekyll
