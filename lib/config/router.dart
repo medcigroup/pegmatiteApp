@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../AboutPage.dart';
+import '../FeaturesPage.dart';
+import '../TechnologyPage.dart';
 import '../screens/landing_page.dart';
 import '../screens/auth/login_page.dart';
 import '../screens/auth/register_page.dart';
@@ -71,6 +74,21 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/auth/register',
         name: 'register',
         pageBuilder: (context, state) => const MaterialPage(child: RegisterPage()),
+      ),
+      GoRoute(
+        path: '/landing/AboutPage',
+        name: 'AboutPage',
+        pageBuilder: (context, state) => const MaterialPage(child: AboutPage()),
+      ),
+      GoRoute(
+        path: '/landing/technology',
+        name: 'technology',
+        pageBuilder: (context, state) => const MaterialPage(child: TechnologyPage()),
+      ),
+      GoRoute(
+        path: '/landing/features',
+        name: 'features',
+        pageBuilder: (context, state) => const MaterialPage(child: FeaturesPage()),
       ),
       ShellRoute(
         builder: (context, state, child) => DashboardShell(child: child),

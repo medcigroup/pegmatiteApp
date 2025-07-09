@@ -87,18 +87,17 @@ class _LandingPageState extends State<LandingPage> {
 
                     const Spacer(),
 
-                    // Navigation buttons
                     if (isDesktop) ...[
                       TextButton(
-                        onPressed: () => _scrollToSection('features'),
+                        onPressed: () => context.go('/landing/features'),
                         child: const Text('Fonctionnalités'),
                       ),
                       TextButton(
-                        onPressed: () => _scrollToSection('technology'),
+                        onPressed: () => context.go('/landing/technology'),
                         child: const Text('Technologie'),
                       ),
                       TextButton(
-                        onPressed: () => _scrollToSection('about'),
+                        onPressed: () => context.go('/landing/AboutPage'),
                         child: const Text('À propos'),
                       ),
                       const SizedBox(width: 16),
@@ -213,24 +212,6 @@ class _LandingPageState extends State<LandingPage> {
                           ),
                         ),
                       ).animate().fadeIn(delay: 600.ms),
-
-                      const SizedBox(width: 16),
-
-                      OutlinedButton.icon(
-                        onPressed: () => _scrollToSection('features'),
-                        icon: const Icon(Icons.play_arrow, color: Colors.white),
-                        label: const Text(
-                          'Voir la démo',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.white),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 32,
-                            vertical: 16,
-                          ),
-                        ),
-                      ).animate().fadeIn(delay: 800.ms),
                     ],
                   ),
 
@@ -244,7 +225,7 @@ class _LandingPageState extends State<LandingPage> {
                         const SizedBox(width: 48),
                         _buildStatItem('85%', 'Précision de détection'),
                         const SizedBox(width: 48),
-                        _buildStatItem('3 Types', 'Pegmatites identifiées'),
+                        _buildStatItem('2 Types', 'Pegmatites identifiées'),
                       ],
                     ).animate().fadeIn(delay: 1000.ms),
                 ],
@@ -330,7 +311,6 @@ class _LandingPageState extends State<LandingPage> {
           const SizedBox(height: 24),
 
           // Carte/terrain
-          // Carte/terrain avec image et overlay
           Container(
             width: double.infinity,
             height: 450,
