@@ -28,7 +28,11 @@ jobs:
     - name: Setup Flutter
       uses: subosito/flutter-action@v2
       with:
+<<<<<<< HEAD
         flutter-version: '3.32.5'  # Version avec Dart 3.8+
+=======
+        flutter-version: '3.27.0'
+>>>>>>> 8ee0144b82eaeba711f516aa843a346a7d20655b
         channel: 'stable'
         cache: true
     
@@ -38,12 +42,20 @@ jobs:
     - name: Get dependencies
       run: flutter pub get
     
+<<<<<<< HEAD
     # Analyse désactivée temporairement pour le déploiement
     # - name: Analyze code
     #   run: flutter analyze --fatal-warnings
     
     - name: Format code
       run: dart format .
+=======
+    - name: Analyze code
+      run: flutter analyze --fatal-infos
+    
+    - name: Check formatting
+      run: dart format --set-exit-if-changed .
+>>>>>>> 8ee0144b82eaeba711f516aa843a346a7d20655b
     
     # Décommentez si vous avez des tests
     # - name: Run tests
@@ -53,7 +65,13 @@ jobs:
       run: |
         flutter build web \
           --release \
+<<<<<<< HEAD
           --base-href "/${{ github.event.repository.name }}/"
+=======
+          --base-href "/${{ github.event.repository.name }}/" \
+          --web-renderer canvaskit \
+          --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/canvaskit/
+>>>>>>> 8ee0144b82eaeba711f516aa843a346a7d20655b
     
     - name: Add .nojekyll file
       run: touch build/web/.nojekyll
