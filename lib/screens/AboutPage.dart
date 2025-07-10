@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
-import '../config/theme.dart';
+import '../../config/theme.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -34,7 +34,10 @@ class _AboutPageState extends State<AboutPage> {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   // Taille du logo basée sur la taille du container
-                  final logoSize = (constraints.maxWidth - 16).clamp(16.0, 32.0);
+                  final logoSize = (constraints.maxWidth - 16).clamp(
+                    16.0,
+                    32.0,
+                  );
 
                   return Image.asset(
                     'assets/images/logo.gif',
@@ -126,10 +129,7 @@ class _AboutPageState extends State<AboutPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppTheme.primaryColor,
-            AppTheme.accentColor,
-          ],
+          colors: [AppTheme.primaryColor, AppTheme.accentColor],
         ),
       ),
       child: Padding(
@@ -147,11 +147,7 @@ class _AboutPageState extends State<AboutPage> {
                 color: Colors.white.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(25),
               ),
-              child: const Icon(
-                Icons.terrain,
-                size: 50,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.terrain, size: 50, color: Colors.white),
             ).animate().fadeIn(delay: 200.ms),
 
             const SizedBox(height: 32),
@@ -252,13 +248,9 @@ class _AboutPageState extends State<AboutPage> {
           if (isDesktop)
             Row(
               children: [
-                Expanded(
-                  child: _buildMissionContent(),
-                ),
+                Expanded(child: _buildMissionContent()),
                 const SizedBox(width: 64),
-                Expanded(
-                  child: _buildMissionImage(),
-                ),
+                Expanded(child: _buildMissionImage()),
               ],
             )
           else
@@ -299,39 +291,41 @@ class _AboutPageState extends State<AboutPage> {
 
         const SizedBox(height: 32),
 
-        ...['Optimiser les campagnes d\'exploration', 'Réduire les coûts et les délais', 'Améliorer la précision de détection', 'Minimiser l\'impact environnemental'].map((objective) =>
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 24,
-                    height: 24,
-                    margin: const EdgeInsets.only(top: 2),
-                    decoration: BoxDecoration(
-                      color: AppTheme.accentColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.check,
-                      color: AppTheme.accentColor,
-                      size: 16,
-                    ),
+        ...[
+          'Optimiser les campagnes d\'exploration',
+          'Réduire les coûts et les délais',
+          'Améliorer la précision de détection',
+          'Minimiser l\'impact environnemental',
+        ].map(
+          (objective) => Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 24,
+                  height: 24,
+                  margin: const EdgeInsets.only(top: 2),
+                  decoration: BoxDecoration(
+                    color: AppTheme.accentColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Text(
-                      objective,
-                      style: TextStyle(
-                        color: Colors.grey.shade700,
-                        fontSize: 16,
-                      ),
-                    ),
+                  child: const Icon(
+                    Icons.check,
+                    color: AppTheme.accentColor,
+                    size: 16,
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    objective,
+                    style: TextStyle(color: Colors.grey.shade700, fontSize: 16),
+                  ),
+                ),
+              ],
             ),
+          ),
         ),
       ],
     );
@@ -380,10 +374,7 @@ class _AboutPageState extends State<AboutPage> {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withOpacity(0.7),
-                    ],
+                    colors: [Colors.transparent, Colors.black.withOpacity(0.7)],
                   ),
                 ),
                 child: Column(
@@ -517,11 +508,7 @@ class _AboutPageState extends State<AboutPage> {
               color: AppTheme.accentColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              icon,
-              color: AppTheme.accentColor,
-              size: 24,
-            ),
+            child: Icon(icon, color: AppTheme.accentColor, size: 24),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -538,10 +525,7 @@ class _AboutPageState extends State<AboutPage> {
                 const SizedBox(height: 4),
                 Text(
                   description,
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 14,
-                  ),
+                  style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
                 ),
               ],
             ),
@@ -592,10 +576,7 @@ class _AboutPageState extends State<AboutPage> {
           const SizedBox(height: 8),
           Text(
             'Développeur du projet',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -632,25 +613,29 @@ class _AboutPageState extends State<AboutPage> {
               _buildContextCard(
                 icon: Icons.business,
                 title: 'Projet Interne SODEMI',
-                description: 'Développé entièrement par les équipes internes de la SODEMI avec leurs expertises techniques et géologiques.',
+                description:
+                    'Développé entièrement par les équipes internes de la SODEMI avec leurs expertises techniques et géologiques.',
                 color: AppTheme.primaryColor,
               ),
               _buildContextCard(
                 icon: Icons.flag,
                 title: 'Objectif National',
-                description: 'Contribuer au développement des ressources minérales critiques en Côte d\'Ivoire.',
+                description:
+                    'Contribuer au développement des ressources minérales critiques en Côte d\'Ivoire.',
                 color: AppTheme.accentColor,
               ),
               _buildContextCard(
                 icon: Icons.timeline,
                 title: 'Innovation Technologique',
-                description: 'Première application d\'IA pour la détection de pegmatites en Afrique de l\'Ouest.',
+                description:
+                    'Première application d\'IA pour la détection de pegmatites en Afrique de l\'Ouest.',
                 color: AppTheme.secondaryColor,
               ),
               _buildContextCard(
                 icon: Icons.public,
                 title: 'Impact Régional',
-                description: 'Potentiel d\'extension à d\'autres pays de la sous-région ouest-africaine.',
+                description:
+                    'Potentiel d\'extension à d\'autres pays de la sous-région ouest-africaine.',
                 color: AppTheme.primaryColor,
               ),
             ],
@@ -688,11 +673,7 @@ class _AboutPageState extends State<AboutPage> {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(
-              icon,
-              size: 28,
-              color: color,
-            ),
+            child: Icon(icon, size: 28, color: color),
           ),
           const SizedBox(width: 20),
           Expanded(
@@ -709,10 +690,7 @@ class _AboutPageState extends State<AboutPage> {
                 const SizedBox(height: 8),
                 Text(
                   description,
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    height: 1.4,
-                  ),
+                  style: TextStyle(color: Colors.grey.shade600, height: 1.4),
                 ),
               ],
             ),
@@ -753,19 +731,22 @@ class _AboutPageState extends State<AboutPage> {
               _buildTeamCard(
                 name: 'Équipe Géologique SODEMI',
                 role: 'Expertise & Validation',
-                description: 'Géologues experts de la SODEMI spécialisés en pegmatites et en validation terrain des résultats d\'exploration.',
+                description:
+                    'Géologues experts de la SODEMI spécialisés en pegmatites et en validation terrain des résultats d\'exploration.',
                 avatar: Icons.terrain,
               ),
               _buildTeamCard(
                 name: 'Équipe Technique SODEMI',
                 role: 'Développement & IA',
-                description: 'Ingénieurs et techniciens SODEMI spécialisés en télédétection, machine learning et SIG.',
+                description:
+                    'Ingénieurs et techniciens SODEMI spécialisés en télédétection, machine learning et SIG.',
                 avatar: Icons.computer,
               ),
               _buildTeamCard(
                 name: 'Direction SODEMI',
                 role: 'Supervision & Stratégie',
-                description: 'Direction technique et stratégique du projet par les cadres supérieurs de la SODEMI.',
+                description:
+                    'Direction technique et stratégique du projet par les cadres supérieurs de la SODEMI.',
                 avatar: Icons.manage_accounts,
               ),
             ],
@@ -803,19 +784,12 @@ class _AboutPageState extends State<AboutPage> {
               color: AppTheme.primaryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(36),
             ),
-            child: Icon(
-              avatar,
-              size: 32,
-              color: AppTheme.primaryColor,
-            ),
+            child: Icon(avatar, size: 32, color: AppTheme.primaryColor),
           ),
           const SizedBox(height: 20),
           Text(
             name,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 8),
@@ -948,11 +922,7 @@ class _AboutPageState extends State<AboutPage> {
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
-                  icon,
-                  size: 24,
-                  color: color,
-                ),
+                child: Icon(icon, size: 24, color: color),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -967,33 +937,35 @@ class _AboutPageState extends State<AboutPage> {
             ],
           ),
           const SizedBox(height: 24),
-          ...items.map((item) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 6,
-                  height: 6,
-                  margin: const EdgeInsets.only(top: 6),
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    item,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      height: 1.4,
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 6,
+                    height: 6,
+                    margin: const EdgeInsets.only(top: 6),
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      item,
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -1024,37 +996,43 @@ class _AboutPageState extends State<AboutPage> {
               _buildTimelineItem(
                 date: 'Mai 2025',
                 title: 'Lancement du Projet',
-                description: 'Début du projet et définition des objectifs avec les équipes SODEMI',
+                description:
+                    'Début du projet et définition des objectifs avec les équipes SODEMI',
                 isCompleted: true,
               ),
               _buildTimelineItem(
                 date: 'Juin 2025',
                 title: 'Recherche & Analyse',
-                description: 'Étude de faisabilité et sélection des technologies par les équipes SODEMI',
+                description:
+                    'Étude de faisabilité et sélection des technologies par les équipes SODEMI',
                 isCompleted: true,
               ),
               _buildTimelineItem(
                 date: 'Juillet-Août 2025',
                 title: 'Développement',
-                description: 'Développement des algorithmes et de l\'interface par les ingénieurs SODEMI',
-                isCompleted: true,
+                description:
+                    'Développement des algorithmes et de l\'interface par les ingénieurs SODEMI',
+                isCompleted: false,
               ),
               _buildTimelineItem(
                 date: 'Septembre 2025',
                 title: 'Tests & Validation',
-                description: 'Tests sur données réelles et validation terrain par les géologues SODEMI',
-                isCompleted: true,
+                description:
+                    'Tests sur données réelles et validation terrain par les géologues SODEMI',
+                isCompleted: false,
               ),
               _buildTimelineItem(
                 date: 'Octobre 2025',
                 title: 'Déploiement',
-                description: 'Mise en production et formation des utilisateurs SODEMI',
-                isCompleted: true,
+                description:
+                    'Mise en production et formation des utilisateurs SODEMI',
+                isCompleted: false,
               ),
               _buildTimelineItem(
                 date: 'Novembre 2025',
                 title: 'Optimisation',
-                description: 'Améliorations continues basées sur les retours des équipes SODEMI',
+                description:
+                    'Améliorations continues basées sur les retours des équipes SODEMI',
                 isCompleted: false,
               ),
             ],
@@ -1081,15 +1059,13 @@ class _AboutPageState extends State<AboutPage> {
                 width: 16,
                 height: 16,
                 decoration: BoxDecoration(
-                  color: isCompleted ? AppTheme.primaryColor : Colors.grey.shade300,
+                  color: isCompleted
+                      ? AppTheme.primaryColor
+                      : Colors.grey.shade300,
                   shape: BoxShape.circle,
                 ),
               ),
-              Container(
-                width: 2,
-                height: 60,
-                color: Colors.grey.shade300,
-              ),
+              Container(width: 2, height: 60, color: Colors.grey.shade300),
             ],
           ),
           const SizedBox(width: 24),
@@ -1116,10 +1092,7 @@ class _AboutPageState extends State<AboutPage> {
                 const SizedBox(height: 8),
                 Text(
                   description,
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    height: 1.4,
-                  ),
+                  style: TextStyle(color: Colors.grey.shade600, height: 1.4),
                 ),
               ],
             ),
@@ -1135,10 +1108,7 @@ class _AboutPageState extends State<AboutPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppTheme.primaryColor,
-            AppTheme.accentColor,
-          ],
+          colors: [AppTheme.primaryColor, AppTheme.accentColor],
         ),
       ),
       padding: EdgeInsets.symmetric(
@@ -1227,10 +1197,7 @@ class _AboutPageState extends State<AboutPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.secondaryColor,
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 32,
-                vertical: 16,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
             ),
           ),
         ],
@@ -1252,11 +1219,7 @@ class _AboutPageState extends State<AboutPage> {
       ),
       child: Column(
         children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 24,
-          ),
+          Icon(icon, color: Colors.white, size: 24),
           const SizedBox(height: 12),
           Text(
             title,

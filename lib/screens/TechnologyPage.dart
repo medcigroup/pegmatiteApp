@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
-import '../config/theme.dart';
+import '../../config/theme.dart';
 
 class TechnologyPage extends StatefulWidget {
   const TechnologyPage({Key? key}) : super(key: key);
@@ -34,7 +34,10 @@ class _TechnologyPageState extends State<TechnologyPage> {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   // Taille du logo basée sur la taille du container
-                  final logoSize = (constraints.maxWidth - 16).clamp(16.0, 32.0);
+                  final logoSize = (constraints.maxWidth - 16).clamp(
+                    16.0,
+                    32.0,
+                  );
 
                   return Image.asset(
                     'assets/images/logo.gif',
@@ -125,10 +128,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppTheme.primaryColor,
-            AppTheme.accentColor,
-          ],
+          colors: [AppTheme.primaryColor, AppTheme.accentColor],
         ),
       ),
       child: Padding(
@@ -146,11 +146,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
                 color: Colors.white.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Icon(
-                Icons.settings,
-                size: 40,
-                color: Colors.white,
-              ),
+              child: const Icon(Icons.settings, size: 40, color: Colors.white),
             ).animate().fadeIn(delay: 200.ms),
 
             const SizedBox(height: 32),
@@ -206,13 +202,9 @@ class _TechnologyPageState extends State<TechnologyPage> {
           if (isDesktop)
             Row(
               children: [
-                Expanded(
-                  child: _buildArchitectureDescription(),
-                ),
+                Expanded(child: _buildArchitectureDescription()),
                 const SizedBox(width: 64),
-                Expanded(
-                  child: _buildArchitectureDiagram(),
-                ),
+                Expanded(child: _buildArchitectureDiagram()),
               ],
             )
           else
@@ -253,30 +245,32 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
         const SizedBox(height: 32),
 
-        ...['Microservices découplés', 'Auto-scaling dynamique', 'Haute disponibilité 99.9%', 'Sécurité multi-niveaux'].map((feature) =>
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16),
-              child: Row(
-                children: [
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: const BoxDecoration(
-                      color: AppTheme.accentColor,
-                      shape: BoxShape.circle,
-                    ),
+        ...[
+          'Microservices découplés',
+          'Auto-scaling dynamique',
+          'Haute disponibilité 99.9%',
+          'Sécurité multi-niveaux',
+        ].map(
+          (feature) => Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Row(
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: AppTheme.accentColor,
+                    shape: BoxShape.circle,
                   ),
-                  const SizedBox(width: 16),
-                  Text(
-                    feature,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 16),
+                Text(
+                  feature,
+                  style: TextStyle(color: Colors.grey.shade700, fontSize: 16),
+                ),
+              ],
             ),
+          ),
         ),
       ],
     );
@@ -292,15 +286,35 @@ class _TechnologyPageState extends State<TechnologyPage> {
       ),
       child: Column(
         children: [
-          _buildArchitectureLayer('Interface Utilisateur', 'Flutter Web', AppTheme.primaryColor),
+          _buildArchitectureLayer(
+            'Interface Utilisateur',
+            'Flutter Web',
+            AppTheme.primaryColor,
+          ),
           const SizedBox(height: 16),
-          _buildArchitectureLayer('API Gateway', 'Supabase Auth', AppTheme.accentColor),
+          _buildArchitectureLayer(
+            'API Gateway',
+            'Supabase Auth',
+            AppTheme.accentColor,
+          ),
           const SizedBox(height: 16),
-          _buildArchitectureLayer('Services Métier', 'Traitement IA', AppTheme.secondaryColor),
+          _buildArchitectureLayer(
+            'Services Métier',
+            'Traitement IA',
+            AppTheme.secondaryColor,
+          ),
           const SizedBox(height: 16),
-          _buildArchitectureLayer('Base de Données', 'PostgreSQL + PostGIS', AppTheme.primaryColor),
+          _buildArchitectureLayer(
+            'Base de Données',
+            'PostgreSQL + PostGIS',
+            AppTheme.primaryColor,
+          ),
           const SizedBox(height: 16),
-          _buildArchitectureLayer('Storage', 'Cloud Storage', Colors.grey.shade600),
+          _buildArchitectureLayer(
+            'Storage',
+            'Cloud Storage',
+            Colors.grey.shade600,
+          ),
         ],
       ),
     );
@@ -319,18 +333,12 @@ class _TechnologyPageState extends State<TechnologyPage> {
         children: [
           Text(
             title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
+            style: TextStyle(fontWeight: FontWeight.bold, color: color),
           ),
           const SizedBox(height: 4),
           Text(
             subtitle,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
           ),
         ],
       ),
@@ -365,14 +373,54 @@ class _TechnologyPageState extends State<TechnologyPage> {
             mainAxisSpacing: 24,
             childAspectRatio: 1.2,
             children: [
-              _buildTechCard('Flutter', 'Framework UI cross-platform', 'assets/tech/flutter.png', AppTheme.primaryColor),
-              _buildTechCard('Supabase', 'Backend-as-a-Service', 'assets/tech/supabase.png', AppTheme.accentColor),
-              _buildTechCard('PostgreSQL', 'Base de données relationnelle', 'assets/tech/postgresql.png', AppTheme.secondaryColor),
-              _buildTechCard('PostGIS', 'Extension géospatiale', 'assets/tech/postgis.png', AppTheme.primaryColor),
-              _buildTechCard('Python', 'Traitement de données', 'assets/tech/python.png', AppTheme.accentColor),
-              _buildTechCard('TensorFlow', 'Machine Learning', 'assets/tech/tensorflow.png', AppTheme.secondaryColor),
-              _buildTechCard('GDAL', 'Traitement géospatial', 'assets/tech/gdal.png', AppTheme.primaryColor),
-              _buildTechCard('Docker', 'Conteneurisation', 'assets/tech/docker.png', AppTheme.accentColor),
+              _buildTechCard(
+                'Flutter',
+                'Framework UI cross-platform',
+                'assets/tech/flutter.png',
+                AppTheme.primaryColor,
+              ),
+              _buildTechCard(
+                'Supabase',
+                'Backend-as-a-Service',
+                'assets/tech/supabase.png',
+                AppTheme.accentColor,
+              ),
+              _buildTechCard(
+                'PostgreSQL',
+                'Base de données relationnelle',
+                'assets/tech/postgresql.png',
+                AppTheme.secondaryColor,
+              ),
+              _buildTechCard(
+                'PostGIS',
+                'Extension géospatiale',
+                'assets/tech/postgis.png',
+                AppTheme.primaryColor,
+              ),
+              _buildTechCard(
+                'Python',
+                'Traitement de données',
+                'assets/tech/python.png',
+                AppTheme.accentColor,
+              ),
+              _buildTechCard(
+                'TensorFlow',
+                'Machine Learning',
+                'assets/tech/tensorflow.png',
+                AppTheme.secondaryColor,
+              ),
+              _buildTechCard(
+                'GDAL',
+                'Traitement géospatial',
+                'assets/tech/gdal.png',
+                AppTheme.primaryColor,
+              ),
+              _buildTechCard(
+                'Docker',
+                'Conteneurisation',
+                'assets/tech/docker.png',
+                AppTheme.accentColor,
+              ),
             ],
           ),
         ],
@@ -380,7 +428,12 @@ class _TechnologyPageState extends State<TechnologyPage> {
     );
   }
 
-  Widget _buildTechCard(String name, String description, String imagePath, Color color) {
+  Widget _buildTechCard(
+    String name,
+    String description,
+    String imagePath,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -404,21 +457,14 @@ class _TechnologyPageState extends State<TechnologyPage> {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(
-              Icons.code,
-              size: 24,
-              color: color,
-            ),
+            child: Icon(Icons.code, size: 24, color: color),
           ),
 
           const SizedBox(height: 16),
 
           Text(
             name,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             textAlign: TextAlign.center,
           ),
 
@@ -426,10 +472,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
           Text(
             description,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
             textAlign: TextAlign.center,
           ),
         ],
@@ -467,22 +510,37 @@ class _TechnologyPageState extends State<TechnologyPage> {
               _buildAICard(
                 icon: Icons.scatter_plot,
                 title: 'K-means Clustering',
-                description: 'Classification non supervisée pour l\'identification des groupes spectraux homogènes',
-                features: ['Initialisation K-means++', 'Optimisation itérative', 'Validation silhouette'],
+                description:
+                    'Classification non supervisée pour l\'identification des groupes spectraux homogènes',
+                features: [
+                  'Initialisation K-means++',
+                  'Optimisation itérative',
+                  'Validation silhouette',
+                ],
                 color: AppTheme.primaryColor,
               ),
               _buildAICard(
                 icon: Icons.account_tree,
                 title: 'Random Forest',
-                description: 'Ensemble d\'arbres de décision pour la classification supervisée des pegmatites',
-                features: ['500 arbres par défaut', 'Sélection de features', 'Validation croisée'],
+                description:
+                    'Ensemble d\'arbres de décision pour la classification supervisée des pegmatites',
+                features: [
+                  '500 arbres par défaut',
+                  'Sélection de features',
+                  'Validation croisée',
+                ],
                 color: AppTheme.accentColor,
               ),
               _buildAICard(
                 icon: Icons.network_check,
                 title: 'Réseaux de Neurones',
-                description: 'Deep Learning pour la reconnaissance de patterns complexes',
-                features: ['Architecture CNN', 'Transfer Learning', 'Augmentation de données'],
+                description:
+                    'Deep Learning pour la reconnaissance de patterns complexes',
+                features: [
+                  'Architecture CNN',
+                  'Transfer Learning',
+                  'Augmentation de données',
+                ],
                 color: AppTheme.secondaryColor,
               ),
             ],
@@ -522,60 +580,52 @@ class _TechnologyPageState extends State<TechnologyPage> {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(
-              icon,
-              size: 28,
-              color: color,
-            ),
+            child: Icon(icon, size: 28, color: color),
           ),
 
           const SizedBox(height: 20),
 
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 12),
 
           Text(
             description,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              height: 1.5,
-            ),
+            style: TextStyle(color: Colors.grey.shade600, height: 1.5),
           ),
 
           const SizedBox(height: 16),
 
-          ...features.map((feature) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Row(
-              children: [
-                Container(
-                  width: 4,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    feature,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 13,
+          ...features.map(
+            (feature) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 4,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      feature,
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -648,7 +698,11 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
           const SizedBox(height: 32),
 
-          _buildFlowStep('Acquisition', 'Données satellitaires', Icons.satellite_alt),
+          _buildFlowStep(
+            'Acquisition',
+            'Données satellitaires',
+            Icons.satellite_alt,
+          ),
           _buildFlowArrow(),
           _buildFlowStep('Prétraitement', 'Corrections & filtrage', Icons.tune),
           _buildFlowArrow(),
@@ -678,11 +732,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
               color: AppTheme.primaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 20,
-            ),
+            child: Icon(icon, color: Colors.white, size: 20),
           ),
           const SizedBox(width: 16),
           Expanded(
@@ -698,10 +748,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
                 ),
               ],
             ),
@@ -738,10 +785,22 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
         _buildSpecItem('Volume de données', '500 km² / 6 jours', Icons.storage),
         _buildSpecItem('Résolution spatiale', '10m - 30m', Icons.grid_on),
-        _buildSpecItem('Bandes spectrales', '11 bandes (0.4-12 μm)', Icons.add_chart_rounded),
+        _buildSpecItem(
+          'Bandes spectrales',
+          '11 bandes (0.4-12 μm)',
+          Icons.add_chart_rounded,
+        ),
         _buildSpecItem('Précision géométrique', '< 15m CE90', Icons.gps_fixed),
-        _buildSpecItem('Couverture temporelle', '2013-2024', Icons.calendar_today),
-        _buildSpecItem('Format de sortie', 'GeoTIFF, Shapefile', Icons.file_present),
+        _buildSpecItem(
+          'Couverture temporelle',
+          '2013-2024',
+          Icons.calendar_today,
+        ),
+        _buildSpecItem(
+          'Format de sortie',
+          'GeoTIFF, Shapefile',
+          Icons.file_present,
+        ),
       ],
     );
   }
@@ -763,11 +822,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
       ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: AppTheme.accentColor,
-            size: 20,
-          ),
+          Icon(icon, color: AppTheme.accentColor, size: 20),
           const SizedBox(width: 16),
           Expanded(
             child: Column(
@@ -782,10 +837,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
                 ),
                 Text(
                   value,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey.shade600,
-                  ),
+                  style: TextStyle(fontSize: 13, color: Colors.grey.shade600),
                 ),
               ],
             ),
@@ -825,25 +877,29 @@ class _TechnologyPageState extends State<TechnologyPage> {
               _buildSecurityCard(
                 icon: Icons.security,
                 title: 'Chiffrement End-to-End',
-                description: 'Toutes les données sont chiffrées en transit et au repos avec AES-256',
+                description:
+                    'Toutes les données sont chiffrées en transit et au repos avec AES-256',
                 color: AppTheme.primaryColor,
               ),
               _buildSecurityCard(
                 icon: Icons.verified_user,
                 title: 'Authentification Multi-Facteurs',
-                description: 'Protection renforcée avec 2FA et authentification biométrique',
+                description:
+                    'Protection renforcée avec 2FA et authentification biométrique',
                 color: AppTheme.accentColor,
               ),
               _buildSecurityCard(
                 icon: Icons.policy,
                 title: 'Conformité RGPD',
-                description: 'Respect total des réglementations sur la protection des données',
+                description:
+                    'Respect total des réglementations sur la protection des données',
                 color: AppTheme.secondaryColor,
               ),
               _buildSecurityCard(
                 icon: Icons.monitor_heart,
                 title: 'Surveillance Continue',
-                description: 'Monitoring 24/7 avec détection automatique des anomalies',
+                description:
+                    'Monitoring 24/7 avec détection automatique des anomalies',
                 color: AppTheme.primaryColor,
               ),
             ],
@@ -881,11 +937,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(
-              icon,
-              size: 28,
-              color: color,
-            ),
+            child: Icon(icon, size: 28, color: color),
           ),
 
           const SizedBox(width: 20),
@@ -906,10 +958,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
                 Text(
                   description,
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    height: 1.4,
-                  ),
+                  style: TextStyle(color: Colors.grey.shade600, height: 1.4),
                 ),
               ],
             ),
@@ -949,7 +998,11 @@ class _TechnologyPageState extends State<TechnologyPage> {
             children: [
               _buildMetricCard('99.9%', 'Disponibilité', Icons.double_arrow),
               _buildMetricCard('< 2s', 'Temps de réponse', Icons.speed),
-              _buildMetricCard('500 km²', 'Traitement / 6 jours', Icons.analytics),
+              _buildMetricCard(
+                '500 km²',
+                'Traitement / 6 jours',
+                Icons.analytics,
+              ),
               _buildMetricCard('Auto', 'Scaling', Icons.trending_up),
             ],
           ),
@@ -975,11 +1028,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            size: 32,
-            color: AppTheme.primaryColor,
-          ),
+          Icon(icon, size: 32, color: AppTheme.primaryColor),
 
           const SizedBox(height: 16),
 
@@ -996,10 +1045,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12,
-              color: Colors.grey.shade600,
-            ),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
             textAlign: TextAlign.center,
           ),
         ],
@@ -1028,10 +1074,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
           Text(
             'Innovations à venir dans les prochaines versions',
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: 16,
-            ),
+            style: TextStyle(color: Colors.grey.shade600, fontSize: 16),
             textAlign: TextAlign.center,
           ),
 
@@ -1048,21 +1091,24 @@ class _TechnologyPageState extends State<TechnologyPage> {
               _buildFutureCard(
                 icon: Icons.architecture,
                 title: 'Edge Computing',
-                description: 'Traitement local pour réduire la latence et améliorer les performances',
+                description:
+                    'Traitement local pour réduire la latence et améliorer les performances',
                 timeline: 'Q2 2026',
                 color: AppTheme.primaryColor,
               ),
               _buildFutureCard(
                 icon: Icons.view_in_ar,
                 title: 'Réalité Augmentée',
-                description: 'Visualisation 3D immersive des données géologiques sur le terrain',
+                description:
+                    'Visualisation 3D immersive des données géologiques sur le terrain',
                 timeline: 'Q3 2026',
                 color: AppTheme.accentColor,
               ),
               _buildFutureCard(
                 icon: Icons.smart_toy,
                 title: 'IA Générative',
-                description: 'Génération automatique de rapports et recommandations d\'exploration',
+                description:
+                    'Génération automatique de rapports et recommandations d\'exploration',
                 timeline: 'Q4 2026',
                 color: AppTheme.secondaryColor,
               ),
@@ -1106,15 +1152,14 @@ class _TechnologyPageState extends State<TechnologyPage> {
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(
-                  icon,
-                  size: 24,
-                  color: color,
-                ),
+                child: Icon(icon, size: 24, color: color),
               ),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: color.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
@@ -1135,20 +1180,14 @@ class _TechnologyPageState extends State<TechnologyPage> {
 
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 12),
 
           Text(
             description,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              height: 1.5,
-            ),
+            style: TextStyle(color: Colors.grey.shade600, height: 1.5),
           ),
         ],
       ),
@@ -1161,10 +1200,7 @@ class _TechnologyPageState extends State<TechnologyPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppTheme.primaryColor,
-            AppTheme.accentColor,
-          ],
+          colors: [AppTheme.primaryColor, AppTheme.accentColor],
         ),
       ),
       padding: EdgeInsets.symmetric(

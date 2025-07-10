@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
-import '../config/theme.dart';
+import '../../config/theme.dart';
 
 class FeaturesPage extends StatefulWidget {
   const FeaturesPage({Key? key}) : super(key: key);
@@ -34,7 +34,10 @@ class _FeaturesPageState extends State<FeaturesPage> {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   // Taille du logo basée sur la taille du container
-                  final logoSize = (constraints.maxWidth - 16).clamp(16.0, 32.0);
+                  final logoSize = (constraints.maxWidth - 16).clamp(
+                    16.0,
+                    32.0,
+                  );
 
                   return Image.asset(
                     'assets/images/logo.gif',
@@ -112,10 +115,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppTheme.primaryColor,
-            AppTheme.accentColor,
-          ],
+          colors: [AppTheme.primaryColor, AppTheme.accentColor],
         ),
       ),
       child: Padding(
@@ -185,33 +185,36 @@ class _FeaturesPageState extends State<FeaturesPage> {
               _buildFeatureCard(
                 icon: Icons.satellite_alt,
                 title: 'Télédétection Multi-Capteurs',
-                description: 'Analyse simultanée des données Landsat 8-9, Sentinel-2 et ASTER pour une couverture spectrale complète de 0.4 à 12 μm.',
+                description:
+                    'Analyse simultanée des données Landsat 8-9, Sentinel-2 et ASTER pour une couverture spectrale complète de 0.4 à 12 μm.',
                 features: [
                   'Résolution spatiale : 30m à 10m',
                   'Couverture temporelle : 2013-2024',
-                  'Indices spectraux optimisés'
+                  'Indices spectraux optimisés',
                 ],
                 color: AppTheme.accentColor,
               ),
               _buildFeatureCard(
                 icon: Icons.psychology,
                 title: 'Intelligence Artificielle',
-                description: 'Algorithmes d\'apprentissage automatique spécialisés pour la détection des pegmatites feldspathiques et à biotite-magnétite.',
+                description:
+                    'Algorithmes d\'apprentissage automatique spécialisés pour la détection des pegmatites feldspathiques et à biotite-magnétite.',
                 features: [
                   'K-means clustering adaptatif',
                   'Random Forest optimisé',
-                  'Validation croisée robuste'
+                  'Validation croisée robuste',
                 ],
                 color: AppTheme.secondaryColor,
               ),
               _buildFeatureCard(
                 icon: Icons.map,
                 title: 'Cartographie Interactive',
-                description: 'Visualisation en temps réel des résultats d\'analyse avec des outils de cartographie avancés.',
+                description:
+                    'Visualisation en temps réel des résultats d\'analyse avec des outils de cartographie avancés.',
                 features: [
                   'Cartes interactives haute résolution',
                   'Superposition de couches',
-                  'Export en formats multiples'
+                  'Export en formats multiples',
                 ],
                 color: AppTheme.primaryColor,
               ),
@@ -257,7 +260,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
                   'NDWI : Humidité du sol',
                   'Clay Index : Minéraux argileux',
                   'Iron Oxide Index : Oxydes de fer',
-                  'Alteration Index : Zones d\'altération'
+                  'Alteration Index : Zones d\'altération',
                 ],
                 icon: Icons.analytics,
               ),
@@ -268,7 +271,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
                   'Random Forest : Prédiction supervisée',
                   'Support Vector Machine : Classification',
                   'Neural Networks : Reconnaissance de patterns',
-                  'Ensemble Methods : Amélioration des performances'
+                  'Ensemble Methods : Amélioration des performances',
                 ],
                 icon: Icons.smart_toy,
               ),
@@ -279,7 +282,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
                   'Shapefile : Données vectorielles',
                   'KML/KMZ : Visualisation Google Earth',
                   'CSV : Données tabulaires',
-                  'JSON : Métadonnées et résultats'
+                  'JSON : Métadonnées et résultats',
                 ],
                 icon: Icons.folder,
               ),
@@ -290,7 +293,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
                   'Rappel : 82%',
                   'Score F1 : 0.83',
                   'Temps de traitement : 5-6 jours/500km²',
-                  'Validation terrain : 78%'
+                  'Validation terrain : 78%',
                 ],
                 icon: Icons.assessment,
               ),
@@ -323,25 +326,65 @@ class _FeaturesPageState extends State<FeaturesPage> {
           if (isDesktop)
             Row(
               children: [
-                Expanded(child: _buildWorkflowStep(1, 'Acquisition', 'Téléchargement automatique des données satellitaires multi-temporelles')),
+                Expanded(
+                  child: _buildWorkflowStep(
+                    1,
+                    'Acquisition',
+                    'Téléchargement automatique des données satellitaires multi-temporelles',
+                  ),
+                ),
                 const SizedBox(width: 24),
-                Expanded(child: _buildWorkflowStep(2, 'Prétraitement', 'Corrections atmosphériques et géométriques')),
+                Expanded(
+                  child: _buildWorkflowStep(
+                    2,
+                    'Prétraitement',
+                    'Corrections atmosphériques et géométriques',
+                  ),
+                ),
                 const SizedBox(width: 24),
-                Expanded(child: _buildWorkflowStep(3, 'Analyse', 'Application des algorithmes d\'IA')),
+                Expanded(
+                  child: _buildWorkflowStep(
+                    3,
+                    'Analyse',
+                    'Application des algorithmes d\'IA',
+                  ),
+                ),
                 const SizedBox(width: 24),
-                Expanded(child: _buildWorkflowStep(4, 'Résultats', 'Génération de cartes et rapports')),
+                Expanded(
+                  child: _buildWorkflowStep(
+                    4,
+                    'Résultats',
+                    'Génération de cartes et rapports',
+                  ),
+                ),
               ],
             )
           else
             Column(
               children: [
-                _buildWorkflowStep(1, 'Acquisition', 'Téléchargement automatique des données satellitaires multi-temporelles'),
+                _buildWorkflowStep(
+                  1,
+                  'Acquisition',
+                  'Téléchargement automatique des données satellitaires multi-temporelles',
+                ),
                 const SizedBox(height: 24),
-                _buildWorkflowStep(2, 'Prétraitement', 'Corrections atmosphériques et géométriques'),
+                _buildWorkflowStep(
+                  2,
+                  'Prétraitement',
+                  'Corrections atmosphériques et géométriques',
+                ),
                 const SizedBox(height: 24),
-                _buildWorkflowStep(3, 'Analyse', 'Application des algorithmes d\'IA'),
+                _buildWorkflowStep(
+                  3,
+                  'Analyse',
+                  'Application des algorithmes d\'IA',
+                ),
                 const SizedBox(height: 24),
-                _buildWorkflowStep(4, 'Résultats', 'Génération de cartes et rapports'),
+                _buildWorkflowStep(
+                  4,
+                  'Résultats',
+                  'Génération de cartes et rapports',
+                ),
               ],
             ),
         ],
@@ -380,22 +423,26 @@ class _FeaturesPageState extends State<FeaturesPage> {
               _buildBenefitCard(
                 icon: Icons.speed,
                 title: 'Rapidité d\'Exécution',
-                description: 'Analyse de 500 km² en 5-6 jours contre plusieurs mois avec les méthodes traditionnelles.',
+                description:
+                    'Analyse de 500 km² en 5-6 jours contre plusieurs mois avec les méthodes traditionnelles.',
               ),
               _buildBenefitCard(
                 icon: Icons.savings,
                 title: 'Réduction des Coûts',
-                description: 'Diminution des coûts d\'exploration jusqu\'à 70% grâce à l\'optimisation des campagnes terrain.',
+                description:
+                    'Diminution des coûts d\'exploration jusqu\'à 70% grâce à l\'optimisation des campagnes terrain.',
               ),
               _buildBenefitCard(
                 icon: Icons.precision_manufacturing,
                 title: 'Précision Améliorée',
-                description: 'Précision de détection de 85% avec validation terrain continue.',
+                description:
+                    'Précision de détection de 85% avec validation terrain continue.',
               ),
               _buildBenefitCard(
                 icon: Icons.eco,
                 title: 'Impact Environnemental',
-                description: 'Réduction de l\'empreinte écologique grâce à l\'optimisation des zones d\'intervention.',
+                description:
+                    'Réduction de l\'empreinte écologique grâce à l\'optimisation des zones d\'intervention.',
               ),
             ],
           ),
@@ -410,10 +457,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            AppTheme.primaryColor,
-            AppTheme.accentColor,
-          ],
+          colors: [AppTheme.primaryColor, AppTheme.accentColor],
         ),
       ),
       padding: EdgeInsets.symmetric(
@@ -514,60 +558,52 @@ class _FeaturesPageState extends State<FeaturesPage> {
               color: color.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(
-              icon,
-              size: 32,
-              color: color,
-            ),
+            child: Icon(icon, size: 32, color: color),
           ),
 
           const SizedBox(height: 24),
 
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 16),
 
           Text(
             description,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              height: 1.5,
-            ),
+            style: TextStyle(color: Colors.grey.shade600, height: 1.5),
           ),
 
           const SizedBox(height: 20),
 
-          ...features.map((feature) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Row(
-              children: [
-                Container(
-                  width: 4,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    feature,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 14,
+          ...features.map(
+            (feature) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                children: [
+                  Container(
+                    width: 4,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      feature,
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -596,11 +632,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
         children: [
           Row(
             children: [
-              Icon(
-                icon,
-                color: AppTheme.primaryColor,
-                size: 24,
-              ),
+              Icon(icon, color: AppTheme.primaryColor, size: 24),
               const SizedBox(width: 12),
               Text(
                 title,
@@ -614,33 +646,35 @@ class _FeaturesPageState extends State<FeaturesPage> {
 
           const SizedBox(height: 24),
 
-          ...items.map((item) => Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 6,
-                  height: 6,
-                  margin: const EdgeInsets.only(top: 6),
-                  decoration: const BoxDecoration(
-                    color: AppTheme.accentColor,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    item,
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      height: 1.4,
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 6,
+                    height: 6,
+                    margin: const EdgeInsets.only(top: 6),
+                    decoration: const BoxDecoration(
+                      color: AppTheme.accentColor,
+                      shape: BoxShape.circle,
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      item,
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -679,20 +713,14 @@ class _FeaturesPageState extends State<FeaturesPage> {
 
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
 
           const SizedBox(height: 8),
 
           Text(
             description,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: 14,
-            ),
+            style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
             textAlign: TextAlign.center,
           ),
         ],
@@ -727,11 +755,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
               color: AppTheme.secondaryColor.withOpacity(0.1),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Icon(
-              icon,
-              size: 28,
-              color: AppTheme.secondaryColor,
-            ),
+            child: Icon(icon, size: 28, color: AppTheme.secondaryColor),
           ),
 
           const SizedBox(width: 24),
@@ -752,10 +776,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
 
                 Text(
                   description,
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    height: 1.4,
-                  ),
+                  style: TextStyle(color: Colors.grey.shade600, height: 1.4),
                 ),
               ],
             ),

@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../AboutPage.dart';
-import '../FeaturesPage.dart';
-import '../TechnologyPage.dart';
+import '../screens/AboutPage.dart';
+import '../screens/FeaturesPage.dart';
+import '../screens/TechnologyPage.dart';
 import '../screens/landing_page.dart';
 import '../screens/auth/login_page.dart';
 import '../screens/auth/register_page.dart';
@@ -20,7 +20,7 @@ class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
     notifyListeners();
     _subscription = stream.asBroadcastStream().listen(
-          (dynamic _) => notifyListeners(),
+      (dynamic _) => notifyListeners(),
     );
   }
 
@@ -63,7 +63,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/',
         name: 'landing',
-        pageBuilder: (context, state) => const MaterialPage(child: LandingPage()),
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: LandingPage()),
       ),
       GoRoute(
         path: '/auth/login',
@@ -73,7 +74,8 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/auth/register',
         name: 'register',
-        pageBuilder: (context, state) => const MaterialPage(child: RegisterPage()),
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: RegisterPage()),
       ),
       GoRoute(
         path: '/landing/AboutPage',
@@ -83,12 +85,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/landing/technology',
         name: 'technology',
-        pageBuilder: (context, state) => const MaterialPage(child: TechnologyPage()),
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: TechnologyPage()),
       ),
       GoRoute(
         path: '/landing/features',
         name: 'features',
-        pageBuilder: (context, state) => const MaterialPage(child: FeaturesPage()),
+        pageBuilder: (context, state) =>
+            const MaterialPage(child: FeaturesPage()),
       ),
       ShellRoute(
         builder: (context, state, child) => DashboardShell(child: child),
@@ -96,31 +100,32 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/dashboard',
             name: 'dashboard',
-            pageBuilder: (context, state) => const MaterialPage(child: DashboardPage()),
+            pageBuilder: (context, state) =>
+                const MaterialPage(child: DashboardPage()),
           ),
           GoRoute(
             path: '/dashboard/analysis',
             name: 'analysis',
-            pageBuilder: (context, state) => const MaterialPage(child: AnalysisPage()),
+            pageBuilder: (context, state) =>
+                const MaterialPage(child: AnalysisPage()),
           ),
           GoRoute(
             path: '/dashboard/results',
             name: 'results',
-            pageBuilder: (context, state) => const MaterialPage(child: ResultsPage()),
+            pageBuilder: (context, state) =>
+                const MaterialPage(child: ResultsPage()),
           ),
           GoRoute(
             path: '/dashboard/settings',
             name: 'settings',
-            pageBuilder: (context, state) => const MaterialPage(child: SettingsPage()),
+            pageBuilder: (context, state) =>
+                const MaterialPage(child: SettingsPage()),
           ),
         ],
       ),
     ],
-    errorBuilder: (context, state) => Scaffold(
-      body: Center(
-        child: Text('Page non trouvée: ${state.uri}'),
-      ),
-    ),
+    errorBuilder: (context, state) =>
+        Scaffold(body: Center(child: Text('Page non trouvée: ${state.uri}'))),
   );
 });
 
@@ -157,11 +162,7 @@ class DashboardSidebar extends ConsumerWidget {
       decoration: const BoxDecoration(
         color: Color(0xFF2E7D32),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 4,
-            offset: Offset(2, 0),
-          ),
+          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(2, 0)),
         ],
       ),
       child: Column(
@@ -195,10 +196,7 @@ class DashboardSidebar extends ConsumerWidget {
                 ),
                 const Text(
                   'Pegmatites Detection',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 12,
-                  ),
+                  style: TextStyle(color: Colors.white70, fontSize: 12),
                 ),
               ],
             ),
@@ -250,32 +248,38 @@ class DashboardSidebar extends ConsumerWidget {
               children: [
                 const Divider(color: Colors.white24),
                 Consumer(
-                    builder: (context, ref, _) {
-                      final authState = ref.watch(authProvider);
-                      final user = authState.asData?.value;
+                  builder: (context, ref, _) {
+                    final authState = ref.watch(authProvider);
+                    final user = authState.asData?.value;
 
-                      return ListTile(
-                        leading: const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.person, color: Color(0xFF2E7D32)),
+                    return ListTile(
+                      leading: const CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.person, color: Color(0xFF2E7D32)),
+                      ),
+                      title: Text(
+                        user?.email ?? 'Utilisateur',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
                         ),
-                        title: Text(
-                          user?.email ?? 'Utilisateur',
-                          style: const TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                      subtitle: Text(
+                        user?.email ?? 'non connecté',
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
                         ),
-                        subtitle: Text(
-                          user?.email ?? 'non connecté',
-                          style: const TextStyle(color: Colors.white70, fontSize: 12),
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.logout, color: Colors.white70),
-                          onPressed: () async {
-                            await ref.read(authProvider.notifier).signOut();
-                            if (context.mounted) context.go('/');
-                          },
-                        ),
-                      );
-                    }
+                      ),
+                      trailing: IconButton(
+                        icon: const Icon(Icons.logout, color: Colors.white70),
+                        onPressed: () async {
+                          await ref.read(authProvider.notifier).signOut();
+                          if (context.mounted) context.go('/');
+                        },
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -286,12 +290,12 @@ class DashboardSidebar extends ConsumerWidget {
   }
 
   Widget _buildMenuItem(
-      BuildContext context, {
-        required IconData icon,
-        required String title,
-        required String route,
-        required bool isActive,
-      }) {
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required String route,
+    required bool isActive,
+  }) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       decoration: BoxDecoration(

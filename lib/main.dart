@@ -9,13 +9,16 @@ void main() async {
 
   await Supabase.initialize(
     url: 'https://ayumgdkxyphniugfzafh.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5dW1nZGt4eXBobml1Z2Z6YWZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5NjIyOTIsImV4cCI6MjA2NzUzODI5Mn0.z-ttA9me4077i6z0H_TNblWZ5wv0U01gHD1q_-qdZTo',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF5dW1nZGt4eXBobml1Z2Z6YWZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE5NjIyOTIsImV4cCI6MjA2NzUzODI5Mn0.z-ttA9me4077i6z0H_TNblWZ5wv0U01gHD1q_-qdZTo',
   );
 
   runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
